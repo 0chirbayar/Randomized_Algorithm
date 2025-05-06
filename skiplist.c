@@ -101,7 +101,7 @@ int main() {
     int samples[] = {5000000, 10000000, 20000000}; 
     int num_samples = sizeof(samples) / sizeof(samples[0]);
     int n;
-
+    int num = 1000000;
     for (int i = 0; i < num_samples; i++)
     {
         clock_t start = clock();
@@ -119,21 +119,21 @@ int main() {
         long long success_total = 0;
         long long fail_total = 0;
 		printf("Searching used keys...\n");
-        for (int i = 0; i < n / 2; i++) {
+        for (int i = 0; i < num / 2; i++) {
             traversed_nodes = 0;
             search(list, keys[rand() % n]);
             success_total += traversed_nodes;
         }
 		printf("Searching unused keys...\n");
-        for (int i = 0; i < n / 2; i++) {
+        for (int i = 0; i < num / 2; i++) {
             traversed_nodes = 0;
             search(list, 2 * (rand() % (n * 2)));
             fail_total += traversed_nodes;
         }
 
         double fail, success;
-        fail = fail_total / (float)(n / 2);
-        success = success_total / (float)(n / 2);
+        fail = fail_total / (float)(num / 2);
+        success = success_total / (float)(num / 2);
         // printf("Average traversed nodes (successful): %.2f\n", success_total / (float)(n / 2));
         // printf("Average traversed nodes (unsuccessful): %.2f\n", fail_total / (float)(n / 2));
         printf("Average traversed nodes: %.2f\n", (fail + success)/2);
